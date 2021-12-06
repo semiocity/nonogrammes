@@ -1,0 +1,7 @@
+td:hover {
+    background-color: red;
+}
+
+td.clicked {
+    background-color: blue;
+}
