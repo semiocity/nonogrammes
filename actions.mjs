@@ -1,30 +1,44 @@
 let table = document.getElementsByName('table')
-
-// function getValuesAndMultiply() {
-//     // valeur_gauche = document.getElementsByName("gauche")[0].value;
-//     // valeur_droite = document.getElementsByName("droite")[0].value;
-//     // champ_produit = document.getElementsByName("produit")[0]
-//     // console.log(valeur_gauche)
-//     // console.log(valeur_droite)
-
-//     // const produit = valeur_droite * valeur_gauche
-//     // champ_produit.value = produit;
-//     console.log(form)
-//     form.produit.value = form.gauche.value * form.droite.value
-// }
+let form = document.getElementById('creation_table')
+let body = document.body
 
 function clickedCell(event) {
-    console.log("3")
     event.target.classList.toggle('clicked');
 }
 
-function init () {
-    console.log("1")
+function createTable() {
+    if (document.querySelector('table')){
+        document.querySelector('table').remove();
+    }
+    console.log(form.lignes.value)
+    let table = document.createElement("table")
+    let tbody = document.createElement("tbody")
+    for (x=0; x<form.lignes.value; x++){
+        ligne = document.createElement("tr")
+        for (y=0; y<form.colonnes.value; y++){
+            data = document.createElement("td")
+            text = document.createTextNode("blabla")
+            data.appendChild(text)
+            ligne.appendChild(data)
+        }
+        tbody.appendChild(ligne)
+    }
+
+    table.appendChild(tbody)
+    body.appendChild(table)
     const cellules = document.querySelectorAll("td")
-    console.log("2")
     cellules.forEach(cell => {
         console.log(cell)
         cell.addEventListener("click", clickedCell)
     })
+
+}
+
+
+
+function init () {
+    const bouton_afficher = document.getElementById("afficher")
+    bouton_afficher.addEventListener('click', createTable)
+
 }
 window.addEventListener("load", init)
