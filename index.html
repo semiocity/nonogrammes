@@ -10,7 +10,23 @@
 
 </head>
 <body>
-    <table>
+    <form id='creation_table' onsubmit='return false;'>
+         <label for="lignes"> Lignes </label>
+         <input name="lignes" type="number" size="5" value=6 required />
+         <label for="colonnes"> Colonnes </label>
+         <input name="colonnes" type="number" size="5" value=6 required />
+         <label for="titre"> Titre </label>
+         <input name="titre" type="text" size="5" value="Toto" required />
+
+         <div>
+            <button name='creer' id='afficher'>Créer table</button>
+        </div>
+        <div>
+            <button name='convertir' id='convertir'>Convertir en JSON</button>
+        </div>
+    </form>
+
+    <!-- <table>
         <tbody>
             <tr><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td></tr>
             <tr><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td></tr>
@@ -19,6 +35,6 @@
             <tr><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td></tr>
             <tr><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td></tr>
         </tbody>
-    </table>
+    </table> -->
 </body>
 </html>
