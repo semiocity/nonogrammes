@@ -24,24 +24,6 @@ function tabToJSON() {
     })
     console.log("JSON: ", json_table);
 }
-
-
-
-//     json_table = tabAray.reduce ((json_nono, tr, i) => {
-//         let row_key = i
-//         let row_value = Array.from(tr).reduce ((json_line, td,j) => {
-//             let td_key = j
-//             let td_value = (td.classList.includes("clicked"))
-//             return ({td_key:td_value})
-//         }
-//         , {} )
-//         return({row_key: row_value})
-
-//         }
-//         , {}
-//     )
-//     console.log(json_table)
-// }
   
   function createTable() {
     if (document.querySelector('table')){
@@ -54,7 +36,7 @@ function tabToJSON() {
         ligne = document.createElement("tr")
         for (y=0; y<form.colonnes.value; y++){
             data = document.createElement("td")
-            text = document.createTextNode("blabla")
+            text = document.createTextNode("[**]")
             data.appendChild(text)
             ligne.appendChild(data)
         }
