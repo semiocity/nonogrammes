@@ -1,17 +1,22 @@
 let table = document.getElementsByName('table')
 let form = document.getElementById('creation_table')
 let body = document.body
-
+let json_table = {
+    nom_du_nonogramme: "",
+    data:[]
+}
+let nonogramme = {}
 function clickedCell(event) {
     event.target.classList.toggle('clicked');
 }
+
 
 
 function tabToJSON() {
     const tbody = document.getElementsByTagName("tbody")[0]
     const tab_array = Array.from(tbody.children);
     console.log("tabarray: ", tab_array);
-    const json_table = {
+    json_table = {
         nom_du_nonogramme: form.titre.value,
         data:[]
     }
@@ -28,6 +33,79 @@ function tabToJSON() {
         // })
     })
     console.log("JSON: ", json_table);
+    return json_table
+}
+
+function JSONtoTips () {
+    const json_table = tabToJSON()
+    rows = []
+    columns = []
+    console.log("json table: ", json_table)
+    for (let i=0; i<json_table.data.length; i++){
+        rows[i] = []
+        columns[i] = []
+
+        let cell_on = false
+        cell_on_counter = 0
+        for (let j=0; j<json_table.data[0].length; j++){
+            cell_on = json_table.data[i][j] 
+            if (cell_on) {
+                cell_on_counter++
+                if (j===json_table.data[0].length-1) {
+                    rows[i].push(cell_on_counter)
+                    columns[i].push(cell_on_counter)
+
+                }
+            }
+            else {
+                if (cell_on_counter!==0) {
+                    if (j===json_table.data[0].length-1) {
+                        rows[i].push(cell_on_counter)
+                        columns[i].push(cell_on_counter)
+
+                    }
+                else {
+                    columns[i].push(cell_on_counter)
+                    rows[i].push(cell_on_counter)
+                    cell_on_counter = 0
+                }
+                }
+            }
+        }
+    }
+    console.log("Rows tips: ", rows)
+
+    columns = []
+    for (let i=0; i<json_table.data.length; i++){
+        columns[i] = []
+        let cell_on = false
+        cell_on_counter = 0
+        for (let j=0; j<json_table.data[0].length; j++){
+            cell_on = json_table.data[j][i] 
+            if (cell_on) {
+                cell_on_counter++
+                if (j===json_table.data[0].length-1) {
+                    columns[i].push(cell_on_counter)
+                }
+            }
+            else {
+                if (cell_on_counter!==0) {
+                    if (j===json_table.data[0].length-1) {
+                        columns[i].push(cell_on_counter)
+                    }
+                else {
+                    columns[i].push(cell_on_counter)
+                    cell_on_counter = 0
+                }
+                }
+            }
+        }
+    }
+    console.log("Column tips: ", columns)
+    nonogramme["rows"]=rows
+    nonogramme["columns"]=columns
+    nonogramme["nom"]=json_table.nom_du_nonogramme
+    console.log("nonogramme: ", nonogramme)
 }
   
   function createTable() {
@@ -62,7 +140,9 @@ function init () {
     const bouton_afficher = document.getElementById("afficher")
     bouton_afficher.addEventListener('click', createTable)
     const bouton_convertir = document.getElementById("convertir")
-    bouton_convertir.addEventListener('click', () => {let nono = tabToJSON()})
+    bouton_convertir.addEventListener('click', tabToJSON)
+    const bouton_convertir2 = document.getElementById("convertir2")
+    bouton_convertir2.addEventListener('click', JSONtoTips)
 
 }
 window.addEventListener("load", init)
