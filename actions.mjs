@@ -11,16 +11,21 @@ function tabToJSON() {
     const tbody = document.getElementsByTagName("tbody")[0]
     const tab_array = Array.from(tbody.children);
     console.log("tabarray: ", tab_array);
-    json_table = {}
+    const json_table = {
+        nom_du_nonogramme: form.titre.value,
+        data:[]
+    }
     tab_array.forEach((row,i) => {
         // json_line = {}
-        json_table[i] = {}
+        // json_table[i] = {}
         const row_array = Array.from(row.children)
         console.log('row_array:', row_array)
-        
-        row_array.forEach((cell, j) => {
-            json_table[i][j]=cell.classList.contains("clicked")
-        })
+        json_table.data.push(
+            row_array.map(cell => cell.classList.contains("clicked"))
+        )
+        // row_array.forEach((cell, j) => {
+        //     json_table[i][j]=cell.classList.contains("clicked")
+        // })
     })
     console.log("JSON: ", json_table);
 }
